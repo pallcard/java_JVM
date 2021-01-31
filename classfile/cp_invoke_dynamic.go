@@ -9,7 +9,7 @@ CONSTANT_MethodHandle_info {
 */
 
 type ConstantMethodHandleInfo struct {
-	referenceKind uint8
+	referenceKind  uint8
 	referenceIndex uint16
 }
 
@@ -43,7 +43,7 @@ CONSTANT_InvokeDynamic_info {
 
 type ConstantInvokeDynamicInfo struct {
 	bootstrapMethodAttrIndex uint16
-	nameAndTypeIndex uint16
+	nameAndTypeIndex         uint16
 }
 
 func (self *ConstantInvokeDynamicInfo) readInfo(reader *ClassReader) {

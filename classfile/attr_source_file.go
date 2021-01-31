@@ -1,10 +1,9 @@
 package classfile
 
 type SourceFileAttribute struct {
-	cp ConstantPool
+	cp              ConstantPool
 	sourceFileIndex uint16
 }
-
 
 func (self *SourceFileAttribute) readInfo(reader *ClassReader) {
 	self.sourceFileIndex = reader.readUint16()

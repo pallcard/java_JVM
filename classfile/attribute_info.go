@@ -4,7 +4,7 @@ type AttributeInfo interface {
 	readInfo(reader *ClassReader)
 }
 
-func readAttributes(reader *ClassReader, cp ConstantPool) [] AttributeInfo {
+func readAttributes(reader *ClassReader, cp ConstantPool) []AttributeInfo {
 	attributeCount := reader.readUint16()
 	attributes := make([]AttributeInfo, attributeCount)
 	for i := range attributes {
@@ -43,8 +43,6 @@ func newAttributeInfo(attrName string, attrLen uint32, cp ConstantPool) Attribut
 		return &SyntheticAttribute{}
 	default:
 		return &UnparsedAttribute{attrName, attrLen, nil}
-
-
 
 	}
 }

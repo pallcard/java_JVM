@@ -1,6 +1,5 @@
 package classfile
 
-
 /*
 CONSTANT_Fieldref_info {
     u1 tag;
@@ -20,8 +19,8 @@ CONSTANT_InterfaceMethodref_info {
 */
 
 type ConstantMemberrefInfo struct {
-	cp ConstantPool
-	classIndex uint16
+	cp               ConstantPool
+	classIndex       uint16
 	nameAndTypeIndex uint16
 }
 

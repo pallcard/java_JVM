@@ -1,7 +1,6 @@
 package classfile
 
 type MarkerAttribute struct {
-
 }
 
 type DeprecatedAttribute struct {

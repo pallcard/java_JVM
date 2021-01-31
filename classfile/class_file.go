@@ -101,10 +101,10 @@ func (self *ClassFile) ConstantPool() ConstantPool {
 	return self.constantPool
 
 }
-func (self *ClassFile) AccessFlags() uint16    {
+func (self *ClassFile) AccessFlags() uint16 {
 	return self.accessFlags
 }
-func (self *ClassFile) Fields() []*MemberInfo  {
+func (self *ClassFile) Fields() []*MemberInfo {
 	return self.fields
 }
 func (self *ClassFile) Methods() []*MemberInfo {
@@ -113,7 +113,7 @@ func (self *ClassFile) Methods() []*MemberInfo {
 func (self *ClassFile) ClassName() string {
 	return self.constantPool.getClassName(self.thisClass)
 }
-func (self *ClassFile) SuperClassName() string   {
+func (self *ClassFile) SuperClassName() string {
 	if self.superClass > 0 {
 		return self.constantPool.getClassName(self.superClass)
 	}
