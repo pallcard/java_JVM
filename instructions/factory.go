@@ -10,6 +10,7 @@ import (
 	"jvmgo/instructions/extended"
 	"jvmgo/instructions/loads"
 	"jvmgo/instructions/math"
+	"jvmgo/instructions/references"
 	"jvmgo/instructions/stack"
 	"jvmgo/instructions/stores"
 )
@@ -52,13 +53,12 @@ func NewInstruction(opcode byte) base.Instruction {
 		return &constants.BIPUSH{}
 	case 0x11:
 		return &constants.SIPUSH{}
-	// todo
-	//case 0x12:
-		//return
-	//case 0x13:
-	//return
-	//case 0x14:
-	//return
+	case 0x12:
+		return &constants.LDC{}
+	case 0x13:
+		return &constants.LDC_W{}
+	case 0x14:
+		return &constants.LDC2_W{}
 	case 0x15:
 		return &loads.ILOAD{}
 	case 0x16:
@@ -111,7 +111,7 @@ func NewInstruction(opcode byte) base.Instruction {
 		return &loads.ALOAD_3{}
 	// todo
 	//case 0x2e:
-		//return
+	//return
 	//case 0x2f:
 	//	return
 	//case 0x30:
@@ -349,9 +349,9 @@ func NewInstruction(opcode byte) base.Instruction {
 	case 0xa7:
 		return &control.GOTO{}
 	//case 0xa8:
-		//return &
+	//return &
 	//case 0xa9:
-		//return &
+	//return &
 	case 0xaa:
 		return &control.TABLE_SWITCH{}
 	case 0xab:
@@ -362,16 +362,23 @@ func NewInstruction(opcode byte) base.Instruction {
 	//case 0xaf:
 	//case 0xb0:
 	//case 0xb1:
-	//case 0xb2:
-	//case 0xb3:
-	//case 0xb4:
-	//case 0xb5:
-	//case 0xb6:
-	//case 0xb7:
+	case 0xb2:
+		return &references.GET_STATIC{}
+	case 0xb3:
+		return &references.PUT_STATIC{}
+	case 0xb4:
+		return &references.GET_FIELD{}
+	case 0xb5:
+		return &references.PUT_FIELD{}
+	case 0xb6:
+		return &references.INVOKE_VIRTUAL{}
+	case 0xb7:
+		return &references.INVOKE_SPECIAL{}
 	//case 0xb8:
 	//case 0xb9:
 	//case 0xba:
-	//case 0xbb:
+	case 0xbb:
+		return &references.NEW{}
 	//case 0xbc:
 	//case 0xbd:
 	//case 0xbe:
@@ -390,7 +397,7 @@ func NewInstruction(opcode byte) base.Instruction {
 	case 0xc8:
 		return &extended.GOTO_W{}
 	//case 0xc9:
-		//return
+	//return
 	//case 0xca:
 
 	//case 0xfe:

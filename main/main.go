@@ -5,6 +5,7 @@ import (
 	"jvmgo/classfile"
 	"jvmgo/classpath"
 	"jvmgo/rtda"
+	"jvmgo/rtda/heap"
 	"strings"
 )
 
@@ -21,17 +22,14 @@ func main() {
 }
 
 func startJVM(cmd *Cmd) {
-	frame := rtda.NewFrame(100, 100)
-	testLocalVars(frame.LocalVars())
-	println("-------------")
-	testOperandStack(frame.OperandStack())
+
 	cp := classpath.Parse(cmd.XjreOption, cmd.cpOption)
+	classLoader := heap.NewClassLoader(cp)
+
 	fmt.Printf("classpath:%v class:%v args:%v\n", cp, cmd.class, cmd.args)
 	className := strings.Replace(cmd.class, ".", "/", -1)
-	cf := loadClass(className, cp)
-	fmt.Println(cmd.class)
-	printClassInfo(cf)
-	mainMethod := getMainMethod(cf)
+	mainClass := classLoader.LoadClass(className)
+	mainMethod := mainClass.GetMainMethod()
 	if mainMethod != nil {
 		interpret(mainMethod)
 	} else {

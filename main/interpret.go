@@ -2,24 +2,32 @@ package main
 
 import (
 	"fmt"
-	"jvmgo/classfile"
 	"jvmgo/instructions"
 	"jvmgo/instructions/base"
 	"jvmgo/rtda"
+	"jvmgo/rtda/heap"
 )
 
-func interpret(methodInfo *classfile.MemberInfo) {
-	codeAttr := methodInfo.CodeAttribute()
-	maxLocals := codeAttr.MaxLocals()
-	maxStack := codeAttr.MaxStack()
-	bytecode := codeAttr.Code()
-	// 创建Thread实例
+//func interpret(methodInfo *classfile.MemberInfo) {
+//	codeAttr := methodInfo.CodeAttribute()
+//	maxLocals := codeAttr.MaxLocals()
+//	maxStack := codeAttr.MaxStack()
+//	bytecode := codeAttr.Code()
+//	// 创建Thread实例
+//	thread := rtda.NewThread()
+//	// 创建帧
+//	frame := thread.NewFrame(maxLocals, maxStack)
+//	thread.PushFrame(frame)
+//	defer catchErr(frame)
+//	loop(thread, bytecode)
+//}
+
+func interpret(method *heap.Method) {
 	thread := rtda.NewThread()
-	// 创建帧
-	frame := thread.NewFrame(maxLocals, maxStack)
+	frame := thread.NewFrame(method)
 	thread.PushFrame(frame)
 	defer catchErr(frame)
-	loop(thread, bytecode)
+	loop(thread, method.Code())
 }
 
 func catchErr(frame *rtda.Frame) {
