@@ -7,14 +7,16 @@ import (
 )
 
 type ClassLoader struct {
-	cp       *classpath.ClassPath
-	classMap map[string]*Class
+	cp          *classpath.ClassPath
+	verboseFlag bool
+	classMap    map[string]*Class
 }
 
-func NewClassLoader(cp *classpath.ClassPath) *ClassLoader {
+func NewClassLoader(cp *classpath.ClassPath, verboseFlag bool) *ClassLoader {
 	return &ClassLoader{
-		cp:       cp,
-		classMap: make(map[string]*Class),
+		cp:          cp,
+		verboseFlag: verboseFlag,
+		classMap:    make(map[string]*Class),
 	}
 }
 
@@ -29,7 +31,9 @@ func (self *ClassLoader) loadNonArrayClass(name string) *Class {
 	data, entry := self.readClass(name)
 	class := self.defineClass(data)
 	link(class)
-	fmt.Printf("[loaded %s from %s]\n", name, entry)
+	if self.verboseFlag {
+		fmt.Printf("[loaded %s from %s]\n", name, entry)
+	}
 	return class
 }
 
@@ -151,7 +155,6 @@ func initStaticFinalVar(class *Class, field *Field) {
 			vars.SetDouble(slotId, val)
 		case "Ljava/lang/String;":
 			panic("todo")
-
 
 		}
 	}

@@ -24,7 +24,7 @@ func (self *ClassMember) isAccessibleTo(d *Class) bool {
 	c := self.class
 	// 保护类
 	if self.IsProtected() {
-		return d == c || d.isSubClassOf(c) || c.getPackageName() == d.getPackageName()
+		return d == c || d.IsSubClassOf(c) || c.getPackageName() == d.getPackageName()
 	}
 	// 私有
 	if !self.IsPrivate() {
@@ -34,27 +34,27 @@ func (self *ClassMember) isAccessibleTo(d *Class) bool {
 }
 
 func (self *ClassMember) IsPublic() bool {
-	return 0 != self.accessFlags & ACC_PUBLIC
+	return 0 != self.accessFlags&ACC_PUBLIC
 }
 
 func (self *ClassMember) IsProtected() bool {
-	return 0 != self.accessFlags & ACC_PROTECTED
+	return 0 != self.accessFlags&ACC_PROTECTED
 }
 
 func (self *ClassMember) IsPrivate() bool {
-	return 0 != self.accessFlags & ACC_PRIVATE
+	return 0 != self.accessFlags&ACC_PRIVATE
 }
 
 func (self *ClassMember) IsStatic() bool {
-	return 0 != self.accessFlags & ACC_STATIC
+	return 0 != self.accessFlags&ACC_STATIC
 }
 
 func (self *ClassMember) IsFinal() bool {
-	return 0 != self.accessFlags & ACC_FINAL
+	return 0 != self.accessFlags&ACC_FINAL
 }
 
 func (self *ClassMember) IsSynthetic() bool {
-	return 0 != self.accessFlags & ACC_SYNTHETIC
+	return 0 != self.accessFlags&ACC_SYNTHETIC
 }
 
 // getters

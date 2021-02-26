@@ -7,12 +7,14 @@ import (
 )
 
 type Cmd struct {
-	helpFlag    bool   // 帮助信息
-	versionFlag bool   //版本信息
-	cpOption    string //用户类路径
-	XjreOption  string // 指定jre目录
-	class       string
-	args        []string
+	helpFlag         bool // 帮助信息
+	versionFlag      bool //版本信息
+	verboseClassFlag bool
+	verboseInstFlag  bool
+	cpOption         string //用户类路径
+	XjreOption       string // 指定jre目录
+	class            string
+	args             []string
 }
 
 func parseCmd() *Cmd {

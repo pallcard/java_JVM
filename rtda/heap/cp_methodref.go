@@ -14,7 +14,7 @@ func newMethodRef(cp *ConstantPool, refInfo *classfile.ConstantMethodrefInfo) *M
 	return ref
 }
 
-func (self *MethodRef) ResolveMethod() *Method {
+func (self *MethodRef) ResolvedMethod() *Method {
 	if self.method == nil {
 		self.resolveMethodRef()
 	}
@@ -22,7 +22,25 @@ func (self *MethodRef) ResolveMethod() *Method {
 }
 
 func (self *MethodRef) resolveMethodRef() {
-	//todo
+	d := self.cp.class
+	c := self.ResolveClass()
+	if c.IsInterface() {
+		panic("java.lang.IncompatibleClassChangeError")
+	}
+	method := lookupMethod(c, self.name, self.descriptor)
+	if method == nil {
+		panic("java.lang.NoSuchMethodError")
+	}
+	if !method.isAccessibleTo(d) {
+		panic("java.lang.IllegalAccessError")
+	}
+	self.method = method
 }
 
-
+func lookupMethod(class *Class, name, descriptor string) *Method {
+	method := LookupMethodInClass(class, name, descriptor)
+	if method == nil {
+		method = lookupMethodInInterfaces(class.interfaces, name, descriptor)
+	}
+	return method
+}
