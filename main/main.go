@@ -22,7 +22,6 @@ func main() {
 }
 
 func startJVM(cmd *Cmd) {
-
 	cp := classpath.Parse(cmd.XjreOption, cmd.cpOption)
 	classLoader := heap.NewClassLoader(cp, cmd.verboseClassFlag)
 

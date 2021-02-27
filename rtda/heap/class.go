@@ -82,6 +82,10 @@ func (self *Class) StaticVars() Slots {
 	return self.staticVars
 }
 
+func (self *Class) Loader() *ClassLoader {
+	return self.loader
+}
+
 func (self *Class) InitStarted() bool {
 	return self.initStarted
 }
@@ -127,4 +131,26 @@ func (self *Class) GetPackageName() string {
 
 func (self *Class) GetClinitMethod() *Method {
 	return self.GetStaticMethod("<clinit>", "()V")
+}
+
+func (self *Class) ArrayClass() *Class {
+	arrayClassName := getArrayClassName(self.name)
+	return self.loader.LoadClass(arrayClassName)
+}
+
+func (self *Class) ComponentClass() *Class {
+	componentClassName := getArrayClassName(self.name)
+	return self.loader.LoadClass(componentClassName)
+}
+
+func (self *Class) isJlObject() bool {
+	return self.name == "java/lang/Object"
+}
+
+func (self *Class) isJlCloneable() bool {
+	return self.name == "java/lang/Cloneable"
+}
+
+func (self *Class) isJioSerializable() bool {
+	return self.name == "java/io/Serializable"
 }
