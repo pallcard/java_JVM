@@ -124,3 +124,7 @@ func (self *Class) GetPackageName() string {
 	}
 	return ""
 }
+
+func (self *Class) GetClinitMethod() *Method {
+	return self.GetStaticMethod("<clinit>", "()V")
+}

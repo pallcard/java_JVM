@@ -19,6 +19,14 @@ func (self *NEW) Execute(frame *rtda.Frame) {
 		panic("java.lang.InstantiationError")
 	}
 
+	if !class.InitStarted() {
+		frame.RevertNextPC()
+		base.InitClass(frame.Thread(), class)
+		return
+	}
+
 	ref := class.NewObject()
 	frame.OperandStack().PushRef(ref)
+
+
 }
