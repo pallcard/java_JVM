@@ -33,8 +33,12 @@ func _ldc(frame *rtda.Frame, index uint) {
 	case float32:
 		stack.PushFloat(c.(float32))
 	case string:
+		internedStr := heap.JString(class.Loader(), c.(string))
+		stack.PushRef(internedStr)
 	case *heap.ClassRef:
-	//todo
+		classRef := c.(*heap.ClassRef)
+		classObj := classRef.ResolveClass().JClass()
+		stack.PushRef(classObj)
 	default:
 		panic("todo:ldc!")
 	}

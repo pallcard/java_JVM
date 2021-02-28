@@ -56,3 +56,17 @@ func (self *Object) ArrayLength() int32 {
 	}
 }
 
+func ArrayCopy(src, dest *Object, srcPos, destPos, length int32) {
+	switch src.data.(type) {
+	case []int32:
+		_src := src.data.([]int32)[srcPos : srcPos+length]
+		_dest := dest.data.([]int32)[destPos : destPos+length]
+		copy(_dest, _src)
+	case []*Object:
+		_src := src.data.([]*Object)[srcPos : srcPos+length]
+		_dest := dest.data.([]*Object)[destPos : destPos+length]
+		copy(_dest, _src)
+	}
+
+}
+
