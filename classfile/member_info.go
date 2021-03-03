@@ -18,11 +18,11 @@ method_info {
 */
 
 type MemberInfo struct {
-	cp              ConstantPool
-	accessFlags     uint16
-	nameIndex       uint16
-	descriptorIndex uint16
-	attributes      []AttributeInfo
+	cp              ConstantPool    //常量池指针
+	accessFlags     uint16          //访问标志
+	nameIndex       uint16          //字段名/方法名
+	descriptorIndex uint16          //描述符
+	attributes      []AttributeInfo //属性表
 }
 
 func readMembers(reader *ClassReader, cp ConstantPool) []*MemberInfo {

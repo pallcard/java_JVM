@@ -21,6 +21,9 @@ ClassFile {
     u2             attributes_count;
     attribute_info attributes[attributes_count];
 }
+
+java 虚拟机定义了u1 u2 u4表示1 2 4字节无符号整数
+
 */
 
 type ClassFile struct {
@@ -91,6 +94,8 @@ func (self *ClassFile) readAndCheckVersion(reader *ClassReader) {
 	}
 	panic("java.lang.UnsupportedClassVersionError!")
 }
+
+//getter
 func (self *ClassFile) MinorVersion() uint16 {
 	return self.minorVersion
 }
@@ -99,7 +104,6 @@ func (self *ClassFile) MajorVersion() uint16 {
 }
 func (self *ClassFile) ConstantPool() ConstantPool {
 	return self.constantPool
-
 }
 func (self *ClassFile) AccessFlags() uint16 {
 	return self.accessFlags

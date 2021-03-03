@@ -1,7 +1,15 @@
 package classfile
 
-//tag常量值定义
 
+/*
+cp_info {
+	u1 tag;
+	u1 info[];
+}
+
+ */
+
+//tag常量值定义
 const (
 	CONSTANT_Class              = 7
 	CONSTANT_Fieldref           = 9
@@ -24,8 +32,11 @@ type ConstantInfo interface {
 }
 
 func readConstantInfo(reader *ClassReader, cp ConstantPool) ConstantInfo {
+	// 读取tag
 	tag := reader.readUint8()
+	// 根据不同的tag来创建具体常量
 	c := newConstantInfo(tag, cp)
+	// 读取常量信息
 	c.readInfo(reader)
 	return c
 }

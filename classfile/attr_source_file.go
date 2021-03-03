@@ -1,5 +1,6 @@
 package classfile
 
+// 可选定长属性，用于指出源文件名
 type SourceFileAttribute struct {
 	cp              ConstantPool
 	sourceFileIndex uint16
