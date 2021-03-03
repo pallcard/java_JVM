@@ -13,11 +13,9 @@ type ZipEntry struct {
 
 func newZipEntry(path string) *ZipEntry {
 	absPath, err := filepath.Abs(path)
-
 	if err != nil {
 		panic(err)
 	}
-
 	return &ZipEntry{absPath}
 }
 
@@ -28,6 +26,7 @@ func (self *ZipEntry) readClass(className string) ([]byte, Entry, error) {
 	}
 	defer r.Close()
 
+	// 遍历压缩包 根据类名找对应的文件
 	for _, f := range r.File {
 		if f.Name == className {
 			rc, err := f.Open()

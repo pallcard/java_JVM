@@ -6,9 +6,9 @@ import (
 )
 
 type ClassPath struct {
-	bootClasspath Entry
-	extClasspath  Entry
-	userClasspath Entry
+	bootClasspath Entry  //启动类路径
+	extClasspath  Entry  //扩展类路径
+	userClasspath Entry  //用户类路径
 }
 
 func Parse(jreOption, cpOption string) *ClassPath {
@@ -34,10 +34,11 @@ func (self *ClassPath) String() string {
 }
 
 func (self *ClassPath) parseBootAndExtClasspath(jreOption string) {
+	// jreDir/lib/*
 	jreDir := getJreDir(jreOption)  //检验和返回jre的目录
 	jreLibPath := filepath.Join(jreDir, "lib", "*")
 	self.bootClasspath = newWildcardEntry(jreLibPath)
-
+	// jreDir/lib/ext/*
 	jreExtPath := filepath.Join(jreDir, "lib", "ext", "*")
 	self.extClasspath = newWildcardEntry(jreExtPath)
 }
@@ -46,7 +47,6 @@ func getJreDir(jreOption string) string {
 	if jreOption != "" && exists(jreOption) {
 		return jreOption
 	}
-
 	if exists("./jre") {
 		return "./jre"
 	}

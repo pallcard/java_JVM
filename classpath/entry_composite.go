@@ -17,6 +17,8 @@ func newCompositeEntry(pathList string) CompositeEntry {
 	return compositeEntry
 }
 
+// 使用的值，不会改变self
+// 如果需要改变self需要使用指针
 func (self CompositeEntry) readClass(className string) ([]byte, Entry, error) {
 	for _, entry := range self {
 		data, from, err := entry.readClass(className)

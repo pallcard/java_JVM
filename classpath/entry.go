@@ -7,8 +7,9 @@ import (
 
 const pathListSeparator = string(os.PathListSeparator)
 
+// 类路径项
 type Entry interface {
-	readClass(className string) ([]byte, Entry, error) //寻找和加载class
+	readClass(className string) ([]byte, Entry, error) // 寻找和加载class
 	String() string                                    // toString
 }
 
