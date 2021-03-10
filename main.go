@@ -11,6 +11,7 @@ import (
 
 func main() {
 	cmd := parseCmd()
+	fmt.Println(cmd)
 	if cmd.versionFlag {
 		fmt.Println("version 0.0.1")
 	} else if cmd.helpFlag || cmd.class == "" {
@@ -23,10 +24,12 @@ func main() {
 
 func startJVM(cmd *Cmd) {
 	cp := classpath.Parse(cmd.XjreOption, cmd.cpOption)
+	className := strings.Replace(cmd.class, ".", "/", -1)
+	printClassInfo(loadClass(className, cp))
 	classLoader := heap.NewClassLoader(cp, cmd.verboseClassFlag)
 
 	fmt.Printf("classpath:%v class:%v args:%v\n", cp, cmd.class, cmd.args)
-	className := strings.Replace(cmd.class, ".", "/", -1)
+
 	mainClass := classLoader.LoadClass(className)
 	mainMethod := mainClass.GetMainMethod()
 	if mainMethod != nil {
