@@ -1,9 +1,13 @@
 package rtda
 
+/**
+java虚拟机栈
+链表实现
+*/
 type Stack struct {
-	maxSize uint
-	size    uint
-	_top    *Frame
+	maxSize uint   //栈容量
+	size    uint   //当前大小
+	_top    *Frame //栈顶指针
 }
 
 func newStack(maxSize uint) *Stack {
@@ -16,6 +20,7 @@ func (self *Stack) push(frame *Frame) {
 	if self.size >= self.maxSize {
 		panic("java.lang.StackOverflowError")
 	}
+	//头插法
 	if self._top != nil {
 		frame.lower = self._top
 	}
@@ -58,4 +63,3 @@ func (self *Stack) GetFrames() []*Frame {
 	}
 	return frames
 }
-

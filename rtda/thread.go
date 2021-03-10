@@ -2,9 +2,12 @@ package rtda
 
 import "jvmgo/rtda/heap"
 
+/**
+线程
+*/
 type Thread struct {
-	pc    int
-	stack *Stack
+	pc    int    //程序计数器
+	stack *Stack //java虚拟机栈
 }
 
 func NewThread() *Thread {

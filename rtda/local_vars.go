@@ -30,6 +30,7 @@ func (self LocalVars) GetFloat(index uint) float32 {
 	return math.Float32frombits(bits)
 }
 
+//Long和Double占两个元素
 func (self LocalVars) SetLong(index uint, val int64) {
 	self[index].num = int32(val)
 	self[index+1].num = int32(val >> 32)

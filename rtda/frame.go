@@ -2,10 +2,13 @@ package rtda
 
 import "jvmgo/rtda/heap"
 
+/**
+帧
+*/
 type Frame struct {
 	lower        *Frame
-	localVars    LocalVars
-	operandStack *OperandStack
+	localVars    LocalVars     //局部变量表
+	operandStack *OperandStack //操作数栈
 	thread       *Thread
 	method       *heap.Method
 	nextPC       int

@@ -67,7 +67,7 @@ func (self *OperandStack) PushRef(ref *heap.Object) {
 func (self *OperandStack) PopRef() *heap.Object {
 	self.size--
 	ref := self.slots[self.size].ref
-	self.slots[self.size].ref = nil
+	self.slots[self.size].ref = nil//弹出后将引用设置为nil，方便垃圾回收器回收
 	return ref
 }
 
