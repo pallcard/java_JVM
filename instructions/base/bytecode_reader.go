@@ -1,8 +1,11 @@
 package base
 
+/**
+
+ */
 type BytecodeReader struct {
-	code []byte
-	pc   int
+	code []byte //字节码
+	pc   int    //记录读取到哪个字节
 }
 
 func (self *BytecodeReader) Reset(code []byte, pc int) {

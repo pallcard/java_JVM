@@ -6,6 +6,7 @@ import (
 )
 
 /**
+ * 把变量从操作数栈顶弹出，然后存入局部变量表
  * 存储int
  */
 type ISTORE struct {

@@ -5,6 +5,9 @@ import (
 	"jvmgo/rtda"
 )
 
+/**
+索引从2个字节变成4个字节
+*/
 type GOTO_W struct {
 	offset int
 }

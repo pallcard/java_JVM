@@ -32,7 +32,7 @@ func _fcmp(frame *rtda.Frame, gFlag bool) {
 		stack.PushInt(0)
 	} else if v1 < v2 {
 		stack.PushInt(-1)
-	} else if gFlag {
+	} else if gFlag {//浮点数计算可能产生NaN（not a number）,此时无法比较
 		stack.PushInt(1)
 	} else {
 		stack.PushInt(-1)

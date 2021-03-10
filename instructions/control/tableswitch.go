@@ -6,14 +6,14 @@ import (
 )
 
 type TABLE_SWITCH struct {
-	defaultOffset int32
-	low int32
-	high int32
-	jumpOffsets []int32
+	defaultOffset int32 //默认情况下执行跳转所需的字节码偏移量
+	low           int32 //记录case的范围
+	high          int32 //记录case的范围
+	jumpOffsets   []int32 //索引表，存放high-low+1个int值
 }
 
 func (self *TABLE_SWITCH) FetchOperands(reader *base.BytecodeReader) {
-	reader.SkipPadding()
+	reader.SkipPadding() //用于保证defaultOffset是4的倍数
 	self.defaultOffset = reader.ReadInt32()
 	self.low = reader.ReadInt32()
 	self.high = reader.ReadInt32()

@@ -5,6 +5,10 @@ import (
 	"jvmgo/rtda"
 )
 
+/**
+条件跳转指令
+ */
+
 type IFEQ struct {
 	base.BranchInstruction
 }

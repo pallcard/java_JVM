@@ -5,6 +5,9 @@ import (
 	"jvmgo/rtda"
 )
 
+/**
+ * 引用是否是null进行跳转
+ */
 type IFNULL struct {
 	base.BranchInstruction
 }

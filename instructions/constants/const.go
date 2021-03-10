@@ -8,7 +8,6 @@ import (
 /**
  * 常量值推入操作数栈
  */
-
 type ACONST_NULL struct {
 	base.NoOperandsInstruction
 }
